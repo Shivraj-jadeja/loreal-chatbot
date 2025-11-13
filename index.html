@@ -3,30 +3,60 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Chat Assistant</title>
+    <title>L’Oréal Beauty Assistant</title>
+
+    <!-- Material Icons for send button -->
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
+
+    <!-- Montserrat font for clean, modern type -->
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap"
       rel="stylesheet"
     />
+
     <link rel="stylesheet" href="style.css" />
   </head>
 
   <body>
     <div class="page-wrapper">
-      <!------- Header / Branding ------->
+      <!-- Header / L'Oréal branding -->
       <header class="site-header">
-        <h1 class="site-title">Smart Product Advisor</h1>
+        <div class="brand-bar">
+          <img
+            src="img/loreal-logo.png"
+            alt="L’Oréal logo"
+            class="loreal-logo"
+          />
+          <div class="brand-text">
+            <h1 class="site-title">L’Oréal Beauty Assistant</h1>
+            <p class="site-tagline">
+              Discover L’Oréal products, routines, and recommendations tailored
+              to you.
+            </p>
+          </div>
+        </div>
       </header>
 
-      <!------- Chat Area ------->
+      <!-- Chat Area -->
       <main>
-        <section class="chatbox">
-          <div id="chatWindow" class="chat-window">
-            <!-- messages will be appended here via JS -->
+        <section class="chatbox" aria-label="L’Oréal chat assistant">
+          <!-- LevelUp: latest user question shown above response -->
+          <div
+            id="currentQuestion"
+            class="current-question"
+            aria-live="polite"
+          ></div>
+
+          <div
+            id="chatWindow"
+            class="chat-window"
+            aria-live="polite"
+            aria-label="Conversation"
+          >
+            <!-- Messages are appended here from script.js -->
           </div>
 
           <form id="chatForm" class="chat-form">
@@ -35,23 +65,25 @@
               id="userInput"
               name="userInput"
               type="text"
-              placeholder="Ask me about products or routines…"
+              placeholder="Ask me about L’Oréal products or beauty routines…"
               autocomplete="off"
               required
             />
             <button type="submit" id="sendBtn">
-              <span class="material-icons">send</span>
+              <span class="material-icons" aria-hidden="true">send</span>
               <span class="visually-hidden">Send</span>
             </button>
           </form>
         </section>
       </main>
 
-      <!------- Footer Links ------->
+      <!-- Footer -->
       <footer class="site-footer">
-        <p>&copy; 2025 Company Name. All rights reserved.</p>
+        <p class="footer-note">
+          Demo project for learning – not an official L’Oréal service.
+        </p>
+        <p>&copy; 2025 L’Oréal Beauty Assistant. All rights reserved.</p>
         <nav>
-          <!-- These URLs are placeholders -->
           <a href="#">Privacy Policy</a>
           <a href="#">Terms of Use</a>
           <a href="#">Contact</a>
@@ -59,7 +91,7 @@
       </footer>
     </div>
 
-    <!-- secrets.js can be removed when using Cloudflare Workers for API requests -->
+    <!-- secrets.js is used only for local testing; it is .gitignored -->
     <script src="secrets.js"></script>
     <script src="script.js"></script>
   </body>

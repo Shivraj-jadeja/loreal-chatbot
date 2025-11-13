@@ -1,3 +1,13 @@
+/* —— CSS variables for L'Oréal brand palette —— */
+:root {
+  --loreal-black: #000000;
+  --loreal-white: #ffffff;
+  --loreal-gold: #b6843f;
+  --loreal-offwhite: #f5f5f5;
+  --loreal-deep-grey: #121212;
+  --border-soft: #2a2a2a;
+}
+
 /* —— basic reset —— */
 * {
   box-sizing: border-box;
@@ -8,90 +18,197 @@
 /* —— body + fonts —— */
 body {
   font-family: "Montserrat", Arial, Helvetica, sans-serif;
-  color: #333;
+  color: #ffffff;
+  background: radial-gradient(circle at top, #2a2a2a 0, #000000 55%);
   display: flex;
   justify-content: center;
 }
 
+/* main card wrapper */
 .page-wrapper {
-  width: 90%;
-  max-width: 900px;
+  width: 95%;
+  max-width: 960px;
+  min-height: 100vh;
+  padding: 32px 16px 40px;
 }
 
-/* header */
+/* —— header / brand bar —— */
 .site-header {
-  text-align: center;
-  padding-top: 50px;
+  margin-bottom: 24px;
+}
+
+.brand-bar {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 18px 20px;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.9);
+  border: 1px solid var(--loreal-gold);
+}
+
+.loreal-logo {
+  height: 40px;
+  width: auto;
+  filter: invert(1) brightness(1.4);
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .site-title {
   font-size: 22px;
-  font-weight: 500;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.site-tagline {
+  font-size: 14px;
+  font-weight: 300;
+  color: #e0e0e0;
+}
+
+/* —— chat layout —— */
+.chatbox {
+  margin: 28px 0 40px;
+  padding: 18px 20px;
+  background: rgba(12, 12, 12, 0.95);
+  border-radius: 14px;
+  border: 1px solid var(--border-soft);
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.55);
+}
+
+/* LevelUp: latest user question just above response */
+.current-question {
+  min-height: 24px;
+  margin-bottom: 12px;
+  font-size: 14px;
+  color: #f0f0f0;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(182, 132, 63, 0.35);
+  background: linear-gradient(
+    90deg,
+    rgba(182, 132, 63, 0.08),
+    rgba(12, 12, 12, 0.95)
+  );
+}
+
+/* chat window scroll area */
+.chat-window {
+  height: 380px;
+  border-radius: 10px;
+  padding: 14px 10px;
+  font-size: 16px;
+  line-height: 1.5;
+  overflow-y: auto;
+  background: linear-gradient(
+    180deg,
+    rgba(18, 18, 18, 0.95),
+    rgba(8, 8, 8, 0.98)
+  );
+}
+
+/* scrollbars for desktop */
+.chat-window::-webkit-scrollbar {
+  width: 8px;
+}
+.chat-window::-webkit-scrollbar-track {
+  background: #111;
+}
+.chat-window::-webkit-scrollbar-thumb {
+  background: #444;
+  border-radius: 999px;
+}
+
+/* —— message bubbles (LevelUp: chat conversation UI) —— */
+.msg {
+  display: flex;
   margin-bottom: 10px;
 }
 
-/* chat window */
-.chatbox {
-  margin: 40px 0;
+.msg-bubble {
+  max-width: 80%;
+  padding: 10px 14px;
+  border-radius: 16px;
+  font-size: 15px;
 }
 
-.chat-window {
-  height: 360px;
-  border: 1px solid #000;
-  padding: 20px;
-  font-size: 18px;
-  line-height: 1.5;
-  overflow-y: auto;
-  background: #fafafa;
-  white-space: pre-line;
-}
-
-/* messages */
-.msg {
-  margin-bottom: 14px;
-  line-height: 1.5;
-}
-
+/* user messages: right side, gold bubble */
 .msg.user {
-  color: #000;
+  justify-content: flex-end;
 }
 
+.msg.user .msg-bubble {
+  background: var(--loreal-gold);
+  color: #000000;
+  border-bottom-right-radius: 4px;
+}
+
+/* AI messages: left side, dark bubble with subtle border */
 .msg.ai {
-  color: #666666;
+  justify-content: flex-start;
 }
 
-/* input row */
+.msg.ai .msg-bubble {
+  background: #161616;
+  color: #f8f8f8;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom-left-radius: 4px;
+}
+
+/* loading / subtle system notes */
+.msg.ai.system-note .msg-bubble {
+  font-size: 13px;
+  opacity: 0.8;
+}
+
+/* —— input row —— */
 .chat-form {
   display: flex;
-  gap: 12px;
+  gap: 10px;
   margin-top: 16px;
 }
 
 .chat-form input {
   flex: 1;
-  padding: 12px;
-  border: 1px solid #ccc;
-  font-size: 18px;
+  padding: 12px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--border-soft);
+  background: #050505;
+  color: #f0f0f0;
+  font-size: 15px;
+}
+
+.chat-form input::placeholder {
+  color: #777777;
 }
 
 .chat-form input:focus {
-  outline: 2px solid #000;
+  outline: 2px solid var(--loreal-gold);
   outline-offset: 2px;
 }
 
+/* send button */
 .chat-form button {
   font-size: 18px;
-  background: #000;
-  color: #fff;
+  background: var(--loreal-gold);
+  color: #000;
   border: none;
-  padding: 12px;
+  padding: 0;
   width: 48px;
   height: 48px;
+  border-radius: 999px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.2s;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.45);
 }
 
 .chat-form button .material-icons {
@@ -99,15 +216,21 @@ body {
 }
 
 .chat-form button:hover {
-  background: #666666;
+  background: #c99754;
+  transform: translateY(-1px);
+}
+
+.chat-form button:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.6);
 }
 
 .chat-form button:focus {
-  outline: 2px solid #000;
+  outline: 2px solid #ffffff;
   outline-offset: 2px;
 }
 
-/* visually hidden */
+/* —— visually hidden —— */
 .visually-hidden {
   position: absolute;
   width: 1px;
@@ -120,24 +243,51 @@ body {
   border: 0;
 }
 
-/* footer */
+/* —— footer —— */
 .site-footer {
-  margin: 60px 0 40px;
+  margin-top: 8px;
   text-align: center;
-  font-size: 14px;
-  color: #666;
+  font-size: 13px;
+  color: #d0d0d0;
+}
+
+.footer-note {
+  margin-bottom: 4px;
+  font-style: italic;
+  color: #aaaaaa;
 }
 
 .site-footer nav {
-  margin-top: 12px;
+  margin-top: 8px;
 }
 
 .site-footer a {
   margin: 0 8px;
-  color: #000;
+  color: var(--loreal-gold);
   text-decoration: none;
+  font-weight: 500;
 }
 
 .site-footer a:hover {
-  color: #666666;
+  text-decoration: underline;
+}
+
+/* —— responsive tweaks —— */
+@media (max-width: 600px) {
+  .brand-bar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .site-title {
+    font-size: 18px;
+  }
+
+  .chat-window {
+    height: 320px;
+  }
+
+  .msg-bubble {
+    max-width: 100%;
+  }
 }
