@@ -61,8 +61,8 @@ body {
 
 /* giant svg so outer rings go partly off-screen, rotated so stroke starts at top */
 .intro-rings-svg {
-  width: 140vmin;
-  height: 140vmin;
+  width: 200vmax;
+  height: 200vmax;
   transform: rotate(-90deg);
 }
 
@@ -72,22 +72,49 @@ body {
   stroke: var(--loreal-gold);
   stroke-width: 1.5;
   stroke-linecap: round;
-  stroke-dasharray: 1;   /* pathLength=1 => easy animation */
+  stroke-dasharray: 1; /* pathLength=1 => easy animation */
   stroke-dashoffset: 1;
   opacity: 0;
   animation: ringStroke 2.4s ease-out forwards;
 }
 
 /* subtle variations for thickness + staggered delays */
-.ring-1 { stroke-width: 1.2; animation-delay: 0.00s; }
-.ring-2 { stroke-width: 1.2; animation-delay: 0.08s; }
-.ring-3 { stroke-width: 1.3; animation-delay: 0.16s; }
-.ring-4 { stroke-width: 1.3; animation-delay: 0.24s; }
-.ring-5 { stroke-width: 1.4; animation-delay: 0.32s; }
-.ring-6 { stroke-width: 1.4; animation-delay: 0.40s; }
-.ring-7 { stroke-width: 1.5; animation-delay: 0.48s; }
-.ring-8 { stroke-width: 1.5; animation-delay: 0.56s; }
-.ring-9 { stroke-width: 1.6; animation-delay: 0.64s; }
+.ring-1 {
+  stroke-width: 1.2;
+  animation-delay: 0s;
+}
+.ring-2 {
+  stroke-width: 1.2;
+  animation-delay: 0.08s;
+}
+.ring-3 {
+  stroke-width: 1.3;
+  animation-delay: 0.16s;
+}
+.ring-4 {
+  stroke-width: 1.3;
+  animation-delay: 0.24s;
+}
+.ring-5 {
+  stroke-width: 1.4;
+  animation-delay: 0.32s;
+}
+.ring-6 {
+  stroke-width: 1.4;
+  animation-delay: 0.4s;
+}
+.ring-7 {
+  stroke-width: 1.5;
+  animation-delay: 0.48s;
+}
+.ring-8 {
+  stroke-width: 1.5;
+  animation-delay: 0.56s;
+}
+.ring-9 {
+  stroke-width: 1.6;
+  animation-delay: 0.64s;
+}
 
 /* center logo using your png, turned white */
 .intro-hero-logo {
@@ -140,7 +167,7 @@ body {
   }
   35% {
     opacity: 1;
-    transform: translate(-50%, -50%) scale(1.0);
+    transform: translate(-50%, -50%) scale(1);
   }
   70% {
     opacity: 1;
@@ -351,8 +378,8 @@ body {
 }
 
 .product-card.selected {
-  border-color: var(--loreal-red);
-  box-shadow: 0 0 0 1px rgba(255, 0, 59, 0.35);
+  border-color: var(--loreal-gold);
+  box-shadow: 0 0 0 1px rgba(227, 165, 53, 0.55);
   background: #151515;
 }
 
