@@ -21,8 +21,39 @@
   </head>
 
   <body>
+    <!-- Intro splash: L'Oréal multi-ring hero -->
+    <div id="introOverlay" class="intro-overlay">
+      <div class="intro-hero">
+        <div class="intro-rings">
+          <svg
+            class="intro-rings-svg"
+            viewBox="-120 -120 240 240"
+            aria-hidden="true"
+          >
+            <!-- 9 concentric rings, drawn from the top one-by-one -->
+            <circle class="intro-ring-svg ring-1" r="40"  pathLength="1"></circle>
+            <circle class="intro-ring-svg ring-2" r="50"  pathLength="1"></circle>
+            <circle class="intro-ring-svg ring-3" r="60"  pathLength="1"></circle>
+            <circle class="intro-ring-svg ring-4" r="70"  pathLength="1"></circle>
+            <circle class="intro-ring-svg ring-5" r="80"  pathLength="1"></circle>
+            <circle class="intro-ring-svg ring-6" r="90"  pathLength="1"></circle>
+            <circle class="intro-ring-svg ring-7" r="100" pathLength="1"></circle>
+            <circle class="intro-ring-svg ring-8" r="110" pathLength="1"></circle>
+            <circle class="intro-ring-svg ring-9" r="120" pathLength="1"></circle>
+          </svg>
+        </div>
+
+        <!-- use existing PNG, turned white via CSS filter -->
+        <img
+          src="img/loreal-logo.png"
+          alt="L’Oréal"
+          class="intro-hero-logo"
+        />
+      </div>
+    </div>
+
     <div class="page-wrapper">
-      <!-- Header / L'Oréal branding -->
+      <!-- header / L'Oréal branding -->
       <header class="site-header">
         <div class="brand-bar">
           <img
@@ -40,8 +71,81 @@
         </div>
       </header>
 
-      <!-- Chat Area -->
       <main>
+        <!-- Product browsing + selection -->
+        <section
+          class="products-section"
+          aria-label="Browse L’Oréal group products and build a routine"
+        >
+          <!-- Filters + search + RTL toggle -->
+          <div class="controls-row">
+            <div class="control-group category-select">
+              <label for="categoryFilter" class="visually-hidden"
+                >Filter by category</label
+              >
+              <select id="categoryFilter">
+                <option value="" selected>All categories</option>
+                <option value="cleanser">Cleansers</option>
+                <option value="moisturizer">Moisturizers &amp; Treatments</option>
+                <option value="haircare">Haircare</option>
+                <option value="makeup">Makeup</option>
+                <option value="hair color">Hair Color</option>
+                <option value="hair styling">Hair Styling</option>
+                <option value="men's grooming">Men's Grooming</option>
+                <option value="suncare">Suncare</option>
+                <option value="fragrance">Fragrance</option>
+              </select>
+            </div>
+
+            <div class="control-group">
+              <label for="productSearch" class="visually-hidden"
+                >Search products</label
+              >
+              <input
+                id="productSearch"
+                type="text"
+                placeholder="Search by name or keyword…"
+                autocomplete="off"
+              />
+            </div>
+
+            <button type="button" id="rtlToggle" class="rtl-toggle">
+              RTL
+            </button>
+          </div>
+
+          <!-- Products Grid -->
+          <div id="productsContainer" class="products-grid">
+            <!-- Filled by script.js -->
+          </div>
+
+          <!-- Selected products area -->
+          <section class="selected-products">
+            <div class="selected-header-row">
+              <h2>Selected Products</h2>
+              <button
+                type="button"
+                id="clearSelected"
+                class="clear-btn"
+              >
+                Clear all
+              </button>
+            </div>
+
+            <div id="selectedProductsList"></div>
+
+            <button
+              id="generateRoutine"
+              class="generate-btn"
+              type="button"
+              disabled
+            >
+              Generate Routine
+            </button>
+          </section>
+        </section>
+
+        <!-- Chat Area -->
         <section class="chatbox" aria-label="L’Oréal chat assistant">
           <!-- LevelUp: latest user question shown above response -->
           <div

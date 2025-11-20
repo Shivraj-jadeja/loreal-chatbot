@@ -2,7 +2,8 @@
 :root {
   --loreal-black: #000000;
   --loreal-white: #ffffff;
-  --loreal-gold: #b6843f;
+  --loreal-gold: #e3a535; /* from brief */
+  --loreal-red: #ff003b; /* from brief */
   --loreal-offwhite: #f5f5f5;
   --loreal-deep-grey: #121212;
   --border-soft: #2a2a2a;
@@ -22,6 +23,148 @@ body {
   background: radial-gradient(circle at top, #2a2a2a 0, #000000 55%);
   display: flex;
   justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+}
+
+/* —— intro splash (L'Oréal multi-ring hero) —— */
+.intro-overlay {
+  position: fixed;
+  inset: 0;
+  background: #000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  pointer-events: none; /* allow clicks through once faded */
+}
+
+.intro-hero {
+  position: relative;
+  width: 180vmin;
+  height: 180vmin;
+  max-width: 2200px;
+  max-height: 2200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* wrapper for svg rings */
+.intro-rings {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* giant svg so outer rings go partly off-screen, rotated so stroke starts at top */
+.intro-rings-svg {
+  width: 140vmin;
+  height: 140vmin;
+  transform: rotate(-90deg);
+}
+
+/* base style for all rings */
+.intro-ring-svg {
+  fill: none;
+  stroke: var(--loreal-gold);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-dasharray: 1;   /* pathLength=1 => easy animation */
+  stroke-dashoffset: 1;
+  opacity: 0;
+  animation: ringStroke 2.4s ease-out forwards;
+}
+
+/* subtle variations for thickness + staggered delays */
+.ring-1 { stroke-width: 1.2; animation-delay: 0.00s; }
+.ring-2 { stroke-width: 1.2; animation-delay: 0.08s; }
+.ring-3 { stroke-width: 1.3; animation-delay: 0.16s; }
+.ring-4 { stroke-width: 1.3; animation-delay: 0.24s; }
+.ring-5 { stroke-width: 1.4; animation-delay: 0.32s; }
+.ring-6 { stroke-width: 1.4; animation-delay: 0.40s; }
+.ring-7 { stroke-width: 1.5; animation-delay: 0.48s; }
+.ring-8 { stroke-width: 1.5; animation-delay: 0.56s; }
+.ring-9 { stroke-width: 1.6; animation-delay: 0.64s; }
+
+/* center logo using your png, turned white */
+.intro-hero-logo {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 220px;
+  max-width: 40vmin;
+  transform: translate(-50%, -50%) scale(0.9);
+  filter: invert(1) brightness(2);
+  opacity: 0;
+  animation: logoIntro 2.8s ease-out 0.9s forwards;
+}
+
+/* overlay fade out after everything finishes */
+.intro-overlay--hide {
+  animation: introOverlayFade 0.7s ease forwards;
+}
+
+/* ring is drawn from top, then pushed out + faded */
+@keyframes ringStroke {
+  0% {
+    stroke-dashoffset: 1;
+    opacity: 0;
+    transform: scale(1);
+    filter: drop-shadow(0 0 0 rgba(227, 165, 53, 0));
+  }
+  20% {
+    opacity: 1;
+  }
+  65% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+    transform: scale(1);
+    filter: drop-shadow(0 0 18px rgba(227, 165, 53, 0.6));
+  }
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0;
+    transform: scale(1.25);
+    filter: drop-shadow(0 0 32px rgba(227, 165, 53, 0));
+  }
+}
+
+/* logo fades in after a few rings, then jumps forward + fades out */
+@keyframes logoIntro {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.9);
+  }
+  35% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.0);
+  }
+  70% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.02);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.25);
+  }
+}
+
+/* overlay fade away */
+@keyframes introOverlayFade {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+/* small tweak for small screens */
+@media (max-width: 480px) {
+  .intro-hero-logo {
+    width: 180px;
+  }
 }
 
 /* main card wrapper */
@@ -30,6 +173,17 @@ body {
   max-width: 960px;
   min-height: 100vh;
   padding: 32px 16px 40px;
+  margin: 0 auto;
+
+  /* start hidden, fade in after intro */
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.page-wrapper.show {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* —— header / brand bar —— */
@@ -50,6 +204,7 @@ body {
 .loreal-logo {
   height: 40px;
   width: auto;
+  /* invert to show logo on dark background */
   filter: invert(1) brightness(1.4);
 }
 
@@ -72,9 +227,305 @@ body {
   color: #e0e0e0;
 }
 
+/* —— products section —— */
+.products-section {
+  margin-top: 12px;
+}
+
+/* filters / search / RTL toggle row */
+.controls-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 16px 0 18px;
+}
+
+.control-group {
+  flex: 1 1 220px;
+}
+
+/* shared pill styling for inputs + selects */
+.control-group input,
+.control-group select {
+  width: 100%;
+  padding: 10px 14px;
+  font-size: 14px;
+  border-radius: 999px;
+  border: 1px solid var(--border-soft);
+  background: #050505;
+  color: #f0f0f0;
+}
+
+/* base select styling (no built-in arrow) */
+.control-group select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding-right: 40px; /* room for custom arrow */
+}
+
+.control-group select:focus,
+.control-group input:focus {
+  outline: 2px solid var(--loreal-gold);
+  outline-offset: 2px;
+}
+
+/* category dropdown wrapper: needed for custom arrow */
+.category-select {
+  position: relative;
+}
+
+/* custom arrow that always sits inside the oval */
+.category-select::after {
+  content: "▾";
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  font-size: 12px;
+  color: var(--loreal-gold);
+}
+
+/* RTL toggle button (LevelUp) */
+.rtl-toggle {
+  flex: 0 0 auto;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--border-soft);
+  background: #050505;
+  color: #f0f0f0;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, transform 0.1s;
+}
+
+.rtl-toggle:hover {
+  background: #111111;
+}
+
+.rtl-toggle.active {
+  border-color: var(--loreal-gold);
+  background: #151515;
+}
+
+/* placeholder message when no filters applied */
+.placeholder-message {
+  width: 100%;
+  text-align: center;
+  padding: 32px 16px;
+  color: #b8b8b8;
+  font-size: 15px;
+  border-radius: 12px;
+  background: rgba(7, 7, 7, 0.9);
+  border: 1px dashed var(--border-soft);
+}
+
+/* products grid */
+.products-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+/* individual product card */
+.product-card {
+  flex: 1 1 calc(33.333% - 12px);
+  min-width: 220px;
+  background: #111111;
+  border-radius: 10px;
+  padding: 10px 10px 12px;
+  border: 1px solid var(--border-soft);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  cursor: pointer;
+  transition: border 0.2s, transform 0.15s, box-shadow 0.15s, background 0.2s;
+}
+
+.product-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.6);
+  border-color: rgba(227, 165, 53, 0.6);
+}
+
+.product-card.selected {
+  border-color: var(--loreal-red);
+  box-shadow: 0 0 0 1px rgba(255, 0, 59, 0.35);
+  background: #151515;
+}
+
+.product-card img {
+  width: 100%;
+  height: 130px;
+  object-fit: contain;
+  border-radius: 8px;
+  background: #050505;
+}
+
+.product-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.product-card h3 {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.product-brand {
+  font-size: 12px;
+  color: #cccccc;
+}
+
+/* Details button to reveal description */
+.details-btn {
+  align-self: flex-start;
+  margin-top: 4px;
+  padding: 4px 10px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: 999px;
+  border: 1px solid var(--border-soft);
+  background: transparent;
+  color: #f0f0f0;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.details-btn:hover {
+  border-color: var(--loreal-gold);
+  background: #1c1c1c;
+}
+
+/* description is hidden by default; shown when card has .show-description */
+.product-description {
+  display: none;
+  margin-top: 4px;
+  font-size: 12px;
+  line-height: 1.4;
+  color: #d0d0d0;
+}
+
+.product-card.show-description .product-description {
+  display: block;
+}
+
+/* —— selected products area —— */
+.selected-products {
+  margin: 8px 0 30px;
+  padding: 14px 16px 18px;
+  border-radius: 12px;
+  background: rgba(8, 8, 8, 0.95);
+  border: 1px solid var(--border-soft);
+}
+
+.selected-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.selected-products h2 {
+  font-size: 18px;
+}
+
+.clear-btn {
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid #555555;
+  background: transparent;
+  color: #dddddd;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.clear-btn:hover {
+  background: #151515;
+  border-color: #888888;
+}
+
+/* selected list */
+#selectedProductsList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-height: 28px;
+}
+
+.empty-selected {
+  font-size: 13px;
+  color: #b8b8b8;
+}
+
+/* selected item pill */
+.selected-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #161616;
+  border: 1px solid var(--loreal-gold);
+  font-size: 12px;
+}
+
+.selected-name {
+  max-width: 180px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.remove-selected {
+  background: transparent;
+  border: none;
+  color: #f5f5f5;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* Generate Routine button */
+.generate-btn {
+  width: 100%;
+  margin-top: 14px;
+  padding: 14px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #000;
+  background: var(--loreal-gold);
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s, box-shadow 0.15s;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.7);
+}
+
+.generate-btn:hover:not(:disabled) {
+  background: #f1b84e;
+  transform: translateY(-1px);
+}
+
+.generate-btn:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.8);
+}
+
+.generate-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+  box-shadow: none;
+}
+
 /* —— chat layout —— */
 .chatbox {
-  margin: 28px 0 40px;
+  margin: 10px 0 40px;
   padding: 18px 20px;
   background: rgba(12, 12, 12, 0.95);
   border-radius: 14px;
@@ -136,6 +587,7 @@ body {
   padding: 10px 14px;
   border-radius: 16px;
   font-size: 15px;
+  white-space: pre-wrap;
 }
 
 /* user messages: right side, gold bubble */
@@ -216,7 +668,7 @@ body {
 }
 
 .chat-form button:hover {
-  background: #c99754;
+  background: #f1b84e;
   transform: translateY(-1px);
 }
 
@@ -273,6 +725,12 @@ body {
 }
 
 /* —— responsive tweaks —— */
+@media (max-width: 800px) {
+  .product-card {
+    flex: 1 1 calc(50% - 10px);
+  }
+}
+
 @media (max-width: 600px) {
   .brand-bar {
     flex-direction: column;
@@ -283,6 +741,10 @@ body {
     font-size: 18px;
   }
 
+  .controls-row {
+    flex-direction: column;
+  }
+
   .chat-window {
     height: 320px;
   }
@@ -290,4 +752,26 @@ body {
   .msg-bubble {
     max-width: 100%;
   }
+}
+
+/* —— RTL layout tweaks (LevelUp) —— */
+[dir="rtl"] body {
+  direction: rtl;
+}
+
+[dir="rtl"] .brand-bar {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .controls-row {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .selected-products,
+[dir="rtl"] .chatbox {
+  text-align: right;
+}
+
+[dir="rtl"] .chat-form {
+  flex-direction: row-reverse;
 }
