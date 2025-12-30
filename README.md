@@ -1,14 +1,83 @@
-# Project 8: L'Oréal Chatbot
+# L’Oréal AI Beauty Assistant
 
-L’Oréal is exploring the power of AI, and your job is to showcase what's possible. Your task is to build a chatbot that helps users discover and understand L’Oréal’s extensive range of products—makeup, skincare, haircare, and fragrances—as well as provide personalized routines and recommendations.
+An AI-powered web application that helps users explore L’Oréal group products and generate personalized beauty routines.  
+The project combines a modern frontend, structured product data, and an OpenAI-powered chatbot secured through a Cloudflare Worker.
 
-## 🚀 Launch via GitHub Codespaces
+---
 
-1. In the GitHub repo, click the **Code** button and select **Open with Codespaces → New codespace**.
-2. Once your codespace is ready, open the `index.html` file via the live preview.
+## Overview
 
-## ☁️ Cloudflare Note
+This application allows users to:
+- Browse and filter products across L’Oréal group brands (skincare, makeup, haircare, fragrance)
+- Select products to build a personalized routine
+- Interact with an AI assistant that provides product explanations and step-by-step recommendations
+- Receive responses constrained to L’Oréal brands and beauty-related topics only
 
-When deploying through Cloudflare, make sure your API request body (in `script.js`) includes a `messages` array and handle the response by extracting `data.choices[0].message.content`.
+The focus of this project is **real-world AI integration**, **API security**, and **user-centered design**.
 
-Enjoy building your L’Oréal beauty assistant! 💄
+---
+
+## Key Features
+
+- **AI-Powered Chatbot**
+  - Uses OpenAI’s Chat Completions API
+  - Maintains multi-turn conversation context
+  - Enforced system prompt to restrict responses to L’Oréal products and beauty topics
+
+- **Personalized Routine Generation**
+  - Users select products from a curated catalog
+  - Selected products are summarized and sent to the AI as structured context
+  - AI generates a clear, step-by-step routine using only selected items
+
+- **Secure API Architecture**
+  - OpenAI API calls are routed through a **Cloudflare Worker**
+  - API keys are never exposed to the client
+  - CORS handled at the worker level for safe frontend access
+
+- **Interactive Product Browsing**
+  - Live search and category filtering
+  - Product details toggle without disrupting selection
+  - Persistent selections using localStorage
+
+- **Accessibility & Global Readiness**
+  - Right-to-left (RTL) layout toggle
+  - Responsive design for desktop and mobile
+  - Clear visual hierarchy and readable UI components
+
+---
+
+## Technical Stack
+
+- **Frontend:** HTML, CSS, JavaScript (ES6)
+- **AI Integration:** OpenAI Chat Completions API
+- **Backend / Proxy:** Cloudflare Workers
+- **Data:** JSON-based product catalog
+- **Storage:** Browser localStorage for session persistence
+
+---
+
+## Architecture Notes
+
+- The frontend sends user messages and context as a `messages` array.
+- Requests are forwarded to a Cloudflare Worker, which:
+  - Injects the OpenAI API key securely
+  - Calls the OpenAI API
+  - Returns only the necessary response data to the client
+- The system prompt ensures:
+  - Brand-safe responses
+  - Topic restriction
+  - Friendly, concise output formatting
+
+---
+
+## Disclaimer
+
+This project is a **demonstration application built for learning purposes**.  
+It is **not an official L’Oréal product or service**.
+
+---
+
+## Author
+
+**Shivraj Jadeja**  
+Software Engineering Apprentice – Global Career Accelerator  
