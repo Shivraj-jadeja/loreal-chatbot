@@ -307,7 +307,6 @@ generateRoutineBtn.addEventListener("click", async () => {
   }));
 
   const contextMessage =
-    const contextMessage =
     "Here is the list of L'Oréal group products the user selected, as JSON:\n\n" +
     JSON.stringify(productSummary, null, 2) +
     "\n\nTask: Create a simple routine using ONLY the selected products. " +
