@@ -1,7 +1,8 @@
 # 💄 L’Oréal AI Beauty Assistant
 
-An AI-powered web application that helps users explore L’Oréal group products and generate personalized beauty routines.  
-The project combines a modern frontend, structured product data, and an OpenAI-powered chatbot secured through a Cloudflare Worker.
+An AI-powered web application that helps users explore L’Oréal group products and generate personalized beauty routines using natural language interaction.
+
+The project combines a modern frontend, structured product data, and a serverless AI backend to demonstrate real-world AI integration in a web application.
 
 ---
 
@@ -11,41 +12,43 @@ The project combines a modern frontend, structured product data, and an OpenAI-p
 
 ## ✨ Overview
 
-This application allows users to:
-- Browse and filter products across L’Oréal group brands (skincare, makeup, haircare, fragrance)
-- Select products to build a personalized routine
-- Interact with an AI assistant that provides product explanations and step-by-step recommendations
-- Receive responses constrained to L’Oréal brands and beauty-related topics only
+The L’Oréal AI Beauty Assistant allows users to discover products and build routines tailored to their needs.
 
-The focus of this project is **real-world AI integration**, **API security**, and **user-centered design**.
+Users can:
+- Browse and filter products across L’Oréal group brands (skincare, makeup, haircare, fragrance)
+- Select products to create a personalized routine
+- Chat with an AI assistant for product explanations and usage guidance
+- Receive clear, step-by-step recommendations in a conversational format
+
+The focus of this project is **AI integration**, **API security**, and **user-centered design**.
 
 ---
 
 ## 🚀 Key Features
 
 - **AI-Powered Chatbot**
-  - Uses OpenAI’s Chat Completions API
-  - Maintains multi-turn conversation context
-  - Enforced system prompt to restrict responses to L’Oréal products and beauty topics
+  - Natural language interface for beauty-related questions
+  - Multi-turn conversation support for contextual recommendations
+  - Responses constrained to L’Oréal group brands and beauty topics
 
 - **Personalized Routine Generation**
-  - Users select products from a curated catalog
-  - Selected products are summarized and sent to the AI as structured context
-  - AI generates a clear, step-by-step routine using only selected items
+  - Uses user-selected products as structured context
+  - Generates simple, easy-to-follow routines
+  - Adapts guidance based on product category and usage
 
-- **Secure API Architecture**
-  - OpenAI API calls are routed through a **Cloudflare Worker**
-  - API keys are never exposed to the client
-  - CORS handled at the worker level for safe frontend access
+- **Secure Serverless Architecture**
+  - AI requests routed through a Cloudflare Worker
+  - API keys securely stored server-side (never exposed to the client)
+  - Uses Groq’s OpenAI-compatible API for fast LLM inference
 
 - **Interactive Product Browsing**
-  - Live search and category filtering
-  - Product details toggle without disrupting selection
-  - Persistent selections using localStorage
+  - Category filtering and live search
+  - Persistent product selection using browser localStorage
+  - Clean, responsive product grid layout
 
 - **Accessibility & Global Readiness**
-  - Right-to-left (RTL) layout toggle
   - Responsive design for desktop and mobile
+  - Optional right-to-left (RTL) layout support
   - Clear visual hierarchy and readable UI components
 
 ---
@@ -53,24 +56,19 @@ The focus of this project is **real-world AI integration**, **API security**, an
 ## 🛠️ Technical Stack
 
 - **Frontend:** HTML, CSS, JavaScript (ES6)
-- **AI Integration:** OpenAI Chat Completions API
+- **AI / LLM:** Groq (OpenAI-compatible Chat Completions API)
 - **Backend / Proxy:** Cloudflare Workers
 - **Data:** JSON-based product catalog
-- **Storage:** Browser localStorage for session persistence
+- **State Management:** Browser localStorage
 
 ---
 
 ## 🧩 Architecture Notes
 
-- The frontend sends user messages and context as a `messages` array.
-- Requests are forwarded to a Cloudflare Worker, which:
-  - Injects the OpenAI API key securely
-  - Calls the OpenAI API
-  - Returns only the necessary response data to the client
-- The system prompt ensures:
-  - Brand-safe responses
-  - Topic restriction
-  - Friendly, concise output formatting
+- The frontend sends structured conversation data as a `messages` array.
+- Requests are proxied through a Cloudflare Worker, which securely forwards them to the Groq API.
+- The system prompt constrains responses to beauty-related topics and L’Oréal group brands.
+- The architecture mirrors production patterns used to safely integrate AI services in client-facing applications.
 
 ---
 
@@ -84,4 +82,4 @@ It is **not an official L’Oréal product or service**.
 ## 👤 Author
 
 **Shivraj Jadeja**  
-Software Engineering Apprentice – Global Career Accelerator  
+Software Engineering Apprentice – Global Career Accelerator
