@@ -307,9 +307,15 @@ generateRoutineBtn.addEventListener("click", async () => {
   }));
 
   const contextMessage =
+    const contextMessage =
     "Here is the list of L'Oréal group products the user selected, as JSON:\n\n" +
     JSON.stringify(productSummary, null, 2) +
-    "\n\nUsing only these products (and optionally suggesting truly helpful complementary items from L'Oréal group brands), create a clear step-by-step routine. Explain when to use each product and any tips for layering or frequency. Keep it concise and friendly.";
+    "\n\nTask: Create a simple routine using ONLY the selected products. " +
+    "Output format must be:\n" +
+    "AM Routine:\n• Step 1 ...\n• Step 2 ...\n\n" +
+    "PM Routine:\n• Step 1 ...\n• Step 2 ...\n\n" +
+    "Then add a short section: Tips (2–4 bullets).\n" +
+    "If a routine is missing something essential (like moisturizer or sunscreen), mention it as 'Optional Additions (L’Oréal group)' but do NOT recommend specific products unless the user asks.";
 
   // For the actual API call, use a trimmed message set to avoid huge history
   const routineMessages = [
