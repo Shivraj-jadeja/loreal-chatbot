@@ -1,11 +1,11 @@
-# L’Oréal AI Beauty Assistant
+# 💄 L’Oréal AI Beauty Assistant
 
 An AI-powered web application that helps users explore L’Oréal group products and generate personalized beauty routines.  
 The project combines a modern frontend, structured product data, and an OpenAI-powered chatbot secured through a Cloudflare Worker.
 
 ---
 
-## Overview
+## ✨ Overview
 
 This application allows users to:
 - Browse and filter products across L’Oréal group brands (skincare, makeup, haircare, fragrance)
@@ -17,7 +17,7 @@ The focus of this project is **real-world AI integration**, **API security**, an
 
 ---
 
-## Key Features
+## 🚀 Key Features
 
 - **AI-Powered Chatbot**
   - Uses OpenAI’s Chat Completions API
@@ -46,7 +46,7 @@ The focus of this project is **real-world AI integration**, **API security**, an
 
 ---
 
-## Technical Stack
+## 🛠️ Technical Stack
 
 - **Frontend:** HTML, CSS, JavaScript (ES6)
 - **AI Integration:** OpenAI Chat Completions API
@@ -56,7 +56,7 @@ The focus of this project is **real-world AI integration**, **API security**, an
 
 ---
 
-## Architecture Notes
+## 🧩 Architecture Notes
 
 - The frontend sends user messages and context as a `messages` array.
 - Requests are forwarded to a Cloudflare Worker, which:
@@ -70,14 +70,14 @@ The focus of this project is **real-world AI integration**, **API security**, an
 
 ---
 
-## Disclaimer
+## ⚠️ Disclaimer
 
 This project is a **demonstration application built for learning purposes**.  
 It is **not an official L’Oréal product or service**.
 
 ---
 
-## Author
+## 👤 Author
 
 **Shivraj Jadeja**  
 Software Engineering Apprentice – Global Career Accelerator  
