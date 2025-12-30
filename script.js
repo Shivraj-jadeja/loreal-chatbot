@@ -1,7 +1,7 @@
 // —— Cloudflare Worker endpoint ——
 // Was added to org in OpenAI but not to Projects so couldn't create API key,
 // will update this once I get invited and can access project!
-const WORKER_URL = "https://loreal-chatbot.sjadeja1-83c.workers.dev";
+const WORKER_URL = "https://loreal-chatbot-api.sjadeja1.workers.dev";
 
 // —— System prompt: keep assistant on L'Oréal + beauty topics only —— //
 const SYSTEM_PROMPT = `
