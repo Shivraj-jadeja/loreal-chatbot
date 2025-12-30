@@ -5,6 +5,10 @@ The project combines a modern frontend, structured product data, and an OpenAI-p
 
 ---
 
+![L’Oréal AI Beauty Assistant](img/loreal-chatbot-home.png)
+
+---
+
 ## ✨ Overview
 
 This application allows users to:
